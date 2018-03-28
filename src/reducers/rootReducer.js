@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 
-
 function foobar(state={}) {
   return state;
 }
