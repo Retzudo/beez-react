@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 import { logIn } from '../../actions/auth';
 import LoginForm from '../forms/LoginForm';
@@ -26,4 +27,4 @@ LoginPage.propTypes = {
   logIn: PropTypes.func.isRequired
 }
 
-export default connect(null, { logIn })(LoginPage);
+export default withRouter(connect(null, { logIn })(LoginPage));

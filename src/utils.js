@@ -7,3 +7,10 @@ export function setAuthorizationHeader(token = null) {
     delete axios.defaults.headers.common.authorization;
   }
 }
+
+export function restoreAuthorizationHeader() {
+  let token = localStorage.getItem('token');
+  if (token) {
+    axios.defaults.headers.common.authorization = `JWT ${token}`;
+  }
+}

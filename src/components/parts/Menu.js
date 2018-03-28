@@ -6,7 +6,7 @@ const MenuPart = () => (
   <Menu secondary>
     <Menu.Menu position="right">
       <Menu.Item name="login">
-        <Link to="login/">Log in</Link>
+        <Link to="/login">Log in</Link>
       </Menu.Item>
     </Menu.Menu>
   </Menu>

@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
+import ApiariesListPage from './components/pages/apiaries/ListPage';
 
 import Menu from './components/parts/Menu';
 
@@ -13,7 +14,8 @@ const App = () => (
     <Menu />
     
     <Route exact path="/" component={HomePage} />
-    <Route path="/login" component={LoginPage} />
+    <Route exact path="/login" component={LoginPage} />
+    <Route exact path="/apiaries" component={ApiariesListPage} />
   </Container>
 );
 
