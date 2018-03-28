@@ -9,7 +9,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './reducers/rootReducer';
-import { restoreAuthorizationHeader, restoreLogin } from './utils';
+import { restoreLogin } from './utils';
 
 const store = createStore(
   rootReducer,

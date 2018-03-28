@@ -11,15 +11,6 @@ export function setAuthorizationHeader(token = null) {
   }
 }
 
-export function restoreAuthorizationHeader() {
-  let token = localStorage.getItem('token');
-  if (token) {
-    axios.defaults.headers.common.authorization = `JWT ${token}`;
-  }
-
-  return token;
-}
-
 export function decodeJwtToUser(token) {
   return {
     ...jwt.decode(token),
