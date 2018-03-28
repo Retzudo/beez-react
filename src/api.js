@@ -1,12 +1,9 @@
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
+import { decodeJwtToUser } from './utils';
 
 const logIn = credentials => axios.post('/api/auth', credentials)
   .then(response => response.data.token)
-  .then(token => ({
-    ...jwt.decode(token),
-    token
-  }));
+  .then(token => decodeJwtToUser(token));
 
 const apiariesList = () => axios.get('/api/apiaries').then(response => response.data);
 const apiariesCreate = data => axios.post('/api/apiaries', data).then(response => response.data);

@@ -9,14 +9,14 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './reducers/rootReducer';
-import { restoreAuthorizationHeader } from './utils';
+import { restoreAuthorizationHeader, restoreLogin } from './utils';
 
 const store = createStore(
   rootReducer,
   applyMiddleware(thunk)
 );
 
-restoreAuthorizationHeader();
+restoreLogin(store);
 
 ReactDOM.render(
   <Provider store={store}>
