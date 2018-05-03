@@ -1,18 +1,25 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { logOut } from '../../actions/auth';
+import UserMenuDropdown from './UserMenuDropdown';
 
 const MenuPart = ({ user, logOut }) => (
-  <Menu secondary>
+  <Menu attached="top">
+    <Menu.Menu>
+      <Menu.Item header as={Link} to="/">
+        <Image src="/images/logo.svg" avatar spaced="right" />
+        Beez
+      </Menu.Item>
+    </Menu.Menu>
     <Menu.Menu position="right">
       <Menu.Item name="login">
         { !user.token
             ? <Link to="/login">Log in</Link>
-            : <a onClick={logOut} style={{cursor: 'pointer'}}>Log out</a>
+            : <UserMenuDropdown username={user.username} logOut={logOut} />
         }
       </Menu.Item>
     </Menu.Menu>

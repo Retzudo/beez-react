@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Container } from 'semantic-ui-react';
+import { Container, Segment } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
 import HomePage from './components/pages/HomePage';
@@ -13,9 +13,11 @@ const App = () => (
   <Container>
     <Menu />
     
-    <Route exact path="/" component={HomePage} />
-    <Route exact path="/login" component={LoginPage} />
-    <Route exact path="/apiaries" component={ApiariesListPage} />
+    <Segment attached="bottom">
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/apiaries" component={ApiariesListPage} />
+    </Segment>
   </Container>
 );
 

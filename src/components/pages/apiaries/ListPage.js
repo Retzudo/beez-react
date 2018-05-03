@@ -1,20 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { fetchApiaries } from '../../../actions/apiaries';
+import ApiaryTable from '../../parts/ApiaryTable';
 
 class ListPage extends React.Component {
+  state = {
+    loading: true
+  }
+
+  fetchApiaries = () => {
+    this.setState({
+      loading: true
+    });
+
+    this.props.fetchApiaries().then(() => {
+      this.setState({
+        loading: false
+      });
+    });
+  }
+
   componentDidMount() {
-    this.props.fetchApiaries();
+    this.fetchApiaries();
   }
 
   render () {
     const { apiaries } = this.props;
 
     return (
-      <ul>
-        { apiaries.map(apiary => <li key={apiary.id}>{apiary.name}</li>)}
-      </ul>
+      <div>
+        <ApiaryTable apiaries={apiaries} isLoading={this.state.loading} reload={this.fetchApiaries} />
+      </div>
     );
   }
 }
