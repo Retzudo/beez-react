@@ -8,14 +8,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './reducers/rootReducer';
-import { restoreLogin } from './utils';
+import { restoreLogin, refreshLogin } from './utils';
 
 const store = createStore(
   rootReducer,
   applyMiddleware(thunk)
 );
 
-restoreLogin(store);
+const wasRestored = restoreLogin(store);
+if (wasRestored) {
+  refreshLogin(store); 
+}
 
 ReactDOM.render(
   <Provider store={store}>

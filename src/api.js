@@ -4,6 +4,8 @@ import { decodeJwtToUser } from './utils';
 const logIn = credentials => axios.post('/api/auth', credentials)
   .then(response => response.data.token)
   .then(token => decodeJwtToUser(token));
+const refreshToken = token => axios.post('/api/auth/refresh', {token})
+  .then(response => response.data.token);
 
 const apiariesList = () => axios.get('/api/apiaries').then(response => response.data);
 const apiariesDetail = id => axios.get(`/api/apiaries/${id}`).then(response => response.data);
@@ -27,7 +29,8 @@ const harvestsUpdate = data => axios.put(`/api/harvests/${data.id}`, data).then(
 
 export default {
   user: {
-    logIn
+    logIn,
+    refreshToken
   },
   apiaries: {
     list: apiariesList,

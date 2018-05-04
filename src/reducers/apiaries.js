@@ -1,9 +1,22 @@
-import { APIARIES_RECEIVED } from '../actions/types';
+import { APIARY_LIST_RECEIVED, APIARY_RECEIVED } from '../actions/types';
 
-function apiaries(state = [], action) {
+const initialState = {
+  list: [],
+  current: {}
+}
+
+function apiaries(state = initialState, action) {
   switch (action.type) {
-    case APIARIES_RECEIVED:
-      return action.apiaries;
+    case APIARY_LIST_RECEIVED:
+      return {
+        ...state,
+        list: action.apiaries
+      };
+    case APIARY_RECEIVED:
+      return {
+        ...state,
+        current: action.apiary
+      };
     default:
       return state;
   }

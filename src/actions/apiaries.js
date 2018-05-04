@@ -1,12 +1,22 @@
-import { APIARIES_RECEIVED } from './types';
+import { APIARY_LIST_RECEIVED, APIARY_RECEIVED } from './types';
 import api from '../api';
 
-export const receivedApiaries = apiaries => ({
-  type: APIARIES_RECEIVED,
+export const receivedApiaryList = apiaries => ({
+  type: APIARY_LIST_RECEIVED,
   apiaries
 });
 
-export const fetchApiaries = () => dispatch => api.apiaries.list()
+export const receivedApiary = apiary => ({
+  type: APIARY_RECEIVED,
+  apiary
+});
+
+export const fetchApiaryList = () => dispatch => api.apiaries.list()
   .then(apiaries => {
-    dispatch(receivedApiaries(apiaries));
+    dispatch(receivedApiaryList(apiaries));
+  });
+
+export const fetchApiaryDetails = id => dispatch => api.apiaries.get(id)
+  .then(apiary => {
+    dispatch(receivedApiary(apiary));
   });

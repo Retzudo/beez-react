@@ -12,7 +12,7 @@ const ApiaryTable = ({ apiaries, isLoading, error, reload }) => (
           <Table.HeaderCell>Address</Table.HeaderCell>
           <Table.HeaderCell>Coords</Table.HeaderCell>
           <Table.HeaderCell style={{textAlign: 'right'}}>
-            <Button icon="refresh" onClick={reload} disabled={isLoading} />
+            <Button icon="refresh" onClick={reload} disabled={isLoading} size="mini" />
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -29,7 +29,7 @@ const ApiaryTable = ({ apiaries, isLoading, error, reload }) => (
             </Table.Cell>
             <Table.Cell>{apiary.address}</Table.Cell>
             <Table.Cell>{apiary.latitude} {apiary.longitude}</Table.Cell>
-            <Table.Cell>
+            <Table.Cell style={{textAlign: 'right'}}>
               <Button as={Link} to={`/dashboard/apiaries/${apiary.id}/edit`} icon="edit" size="mini" />
             </Table.Cell>
           </Table.Row>
