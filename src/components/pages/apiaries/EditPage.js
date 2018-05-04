@@ -15,14 +15,14 @@ class EditPage extends React.Component {
   }
 
   fetchApiary = () => {
-    const { match } = this.props;
+    const { params } = this.props.match;
 
     this.setState({
       loading: true,
-      error: false
+      error: null
     });
 
-    api.apiaries.get(match.id).then(apiary => {
+    api.apiaries.get(params.id).then(apiary => {
       this.setState({
         loading: false,
         apiary
@@ -36,7 +36,22 @@ class EditPage extends React.Component {
   }
 
   onSubmit = apiary => {
-    api.apiaries.update(apiary);
+    this.setState({
+      loading: true,
+      error: null
+    });
+
+    api.apiaries.update(apiary).then(() => {
+      this.setState({
+        loading: false
+      });
+    }).catch(error => {
+      this.setState({
+        loading: false,
+        apiary,
+        error
+      });
+    });
   }
 
   render() {
