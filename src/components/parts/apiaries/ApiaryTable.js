@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Loader, Button, Message } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const ApiaryTable = ({ apiaries, isLoading, error, reload }) => (
   <div>
@@ -23,10 +24,14 @@ const ApiaryTable = ({ apiaries, isLoading, error, reload }) => (
           </Table.Cell>
         </Table.Row> : apiaries.map(apiary => (
           <Table.Row key={apiary.id}>
-            <Table.Cell>{apiary.name}</Table.Cell>
+            <Table.Cell>
+              <Link to={`/dashboard/apiaries/${apiary.id}`}>{apiary.name}</Link>
+            </Table.Cell>
             <Table.Cell>{apiary.address}</Table.Cell>
             <Table.Cell>{apiary.latitude} {apiary.longitude}</Table.Cell>
-            <Table.Cell>edit</Table.Cell>
+            <Table.Cell>
+              <Button as={Link} to={`/dashboard/apiaries/${apiary.id}/edit`} icon="edit" size="mini" />
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

@@ -3,9 +3,9 @@ import { Route } from 'react-router-dom';
 import { Container, Segment } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
-import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import ApiariesListPage from './components/pages/apiaries/ListPage';
+import ApiariesEditPage from './components/pages/apiaries/EditPage';
 
 import Menu from './components/parts/Menu';
 
@@ -14,9 +14,9 @@ const App = () => (
     <Menu />
     
     <Segment attached="bottom">
-      <Route exact path="/" component={HomePage} />
+      <Route exact path="/dashboard/apiaries" component={ApiariesListPage} />
+      <Route exact path="/dashboard/apiaries/:id/edit" component={ApiariesEditPage} />
       <Route exact path="/login" component={LoginPage} />
-      <Route exact path="/apiaries" component={ApiariesListPage} />
     </Segment>
   </Container>
 );

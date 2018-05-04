@@ -3,17 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { fetchApiaries } from '../../../actions/apiaries';
-import ApiaryTable from '../../parts/ApiaryTable';
+import ApiaryTable from '../../parts/apiaries/ApiaryTable';
 
 class ListPage extends React.Component {
   state = {
-    loading: true
+    loading: true,
+    error: null
+  }
+
+  componentDidMount() {
+    this.fetchApiaries();
   }
 
   fetchApiaries = () => {
     this.setState({
       loading: true,
-      error: false
+      error: null
     });
 
     this.props.fetchApiaries().then(() => {
@@ -26,10 +31,6 @@ class ListPage extends React.Component {
         error
       });
     });
-  }
-
-  componentDidMount() {
-    this.fetchApiaries();
   }
 
   render () {
