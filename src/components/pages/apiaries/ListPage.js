@@ -12,12 +12,18 @@ class ListPage extends React.Component {
 
   fetchApiaries = () => {
     this.setState({
-      loading: true
+      loading: true,
+      error: false
     });
 
     this.props.fetchApiaries().then(() => {
       this.setState({
         loading: false
+      });
+    }).catch(error => {
+      this.setState({
+        loading: false,
+        error
       });
     });
   }
@@ -31,7 +37,7 @@ class ListPage extends React.Component {
 
     return (
       <div>
-        <ApiaryTable apiaries={apiaries} isLoading={this.state.loading} reload={this.fetchApiaries} />
+        <ApiaryTable apiaries={apiaries} isLoading={this.state.loading} error={this.state.error} reload={this.fetchApiaries} />
       </div>
     );
   }
