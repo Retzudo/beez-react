@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
 import ApiaryForm from '../../parts/apiaries/ApiaryForm';
 import api from '../../../api';
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
+
+import { updateApiary } from '../../../actions/apiaries';
 
 class EditPage extends React.Component {
   state = {
@@ -41,9 +44,10 @@ class EditPage extends React.Component {
       error: null
     });
 
-    api.apiaries.update(apiary).then(() => {
+    this.props.updateApiary(apiary).then(apiary => {
       this.setState({
-        loading: false
+        loading: false,
+        apiary
       });
     }).catch(error => {
       this.setState({
@@ -64,7 +68,8 @@ EditPage.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string.isRequired
     })
-  })
+  }),
+  updateApiary: PropTypes.func.isRequired
 }
 
-export default EditPage;
+export default connect(null, { updateApiary })(EditPage);

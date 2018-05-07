@@ -77,7 +77,7 @@ ListPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  apiaries: state.apiaries.list
+  apiaries: state.apiaries
 });
 
 export default withRouter(connect(mapStateToProps, { fetchApiaryList })(ListPage));

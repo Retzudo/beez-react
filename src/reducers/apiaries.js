@@ -1,27 +1,19 @@
-import { APIARY_LIST_RECEIVED, APIARY_RECEIVED, APIARY_CREATED } from '../actions/types';
+import { APIARY_LIST_RECEIVED, APIARY_CREATED, APIARY_UPDATED } from '../actions/types';
 
-const initialState = {
-  list: [],
-  current: {}
-}
-
-function apiaries(state = initialState, action) {
+function apiaries(state = [], action) {
   switch (action.type) {
     case APIARY_LIST_RECEIVED:
-      return {
-        ...state,
-        list: action.apiaries
-      };
-    case APIARY_RECEIVED:
-      return {
-        ...state,
-        current: action.apiary
-      };
+      return action.apiaries;
     case APIARY_CREATED:
-      return {
-        ...state,
-        list: [...state.list, action.apiary]
-      }
+      return [...state.list, action.apiary]
+    case APIARY_UPDATED:
+      return state.list.map(apiary => {
+        if (apiary.id === action.apiary.id) {
+          return action.apiary;
+        } else {
+          return apiary;
+        }
+      })
     default:
       return state;
   }

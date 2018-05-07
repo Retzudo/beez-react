@@ -1,43 +1,35 @@
 import React from 'react';
-import { Header, Dimmer, Loader } from 'semantic-ui-react';
+import { Header, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchApiaryDetails } from '../../../actions/apiaries';
+import { fetchApiaryList } from '../../../actions/apiaries';
 
 class DetailPage extends React.Component {
   state = {
     loading: false,
-    error: null
+    error: null,
+    didFetch: false
   }
 
   componentDidMount() {
-    if (Object.keys(this.props.apiary).length === 0) {
-      this.fetchApiary();
+    if (this.props.apiaries.length === 0 && !this.state.didFetch) {
+      this.props.fetchApiaryList();
+      this.setState({
+        didFetch: false
+      });
     }
   }
 
-  fetchApiary = () => {
-    const { params } = this.props.match;
-    
-    this.setState({
-      loading: true
-    });
-
-    this.props.fetchApiaryDetails(params.id).then(() => {
-      this.setState({
-        loading: false
-      });
-    }).catch(error => {
-      this.setState({
-        loading: false,
-        error
-      });
-    });
-  }
-
   render() {
-    const { apiary } = this.props;
+    const { apiaries } = this.props;
+    const apiary = apiaries.find(apiary => apiary.id === parseInt(this.props.match.params.id));
+
+    if (!apiary) {
+      return <Message error>
+        404
+      </Message>
+    }
 
     return (
       <div>
@@ -54,12 +46,12 @@ DetailPage.propTypes = {
       id: PropTypes.string.isRequired
     })
   }),
-  apiary: PropTypes.object.isRequired,
-  fetchApiaryDetails: PropTypes.func.isRequired
+  apiaries: PropTypes.array.isRequired,
+  fetchApiaryList: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  apiary: state.apiaries.current
+  apiaries: state.apiaries
 });
 
-export default connect(mapStateToProps, { fetchApiaryDetails })(DetailPage);
+export default connect(mapStateToProps, { fetchApiaryList })(DetailPage);
