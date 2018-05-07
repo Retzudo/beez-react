@@ -3,7 +3,7 @@ import { Table, Loader, Button, Message } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const ApiaryTable = ({ apiaries, isLoading, error, reload }) => (
+const ApiaryTable = ({ apiaries, isLoading, error, reload, add, detail }) => (
   <div>
     <Table attached={error ? 'top' : false}>
       <Table.Header>
@@ -13,6 +13,7 @@ const ApiaryTable = ({ apiaries, isLoading, error, reload }) => (
           <Table.HeaderCell>Coords</Table.HeaderCell>
           <Table.HeaderCell style={{textAlign: 'right'}}>
             <Button icon="refresh" onClick={reload} disabled={isLoading} size="mini" />
+            <Button icon="add" onClick={add} disabled={isLoading} size="mini" />
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -30,7 +31,7 @@ const ApiaryTable = ({ apiaries, isLoading, error, reload }) => (
             <Table.Cell>{apiary.address}</Table.Cell>
             <Table.Cell>{apiary.latitude} {apiary.longitude}</Table.Cell>
             <Table.Cell style={{textAlign: 'right'}}>
-              <Button as={Link} to={`/dashboard/apiaries/${apiary.id}/edit`} icon="edit" size="mini" />
+              <Button onClick={detail} icon="edit" size="mini" data-apiary-id={apiary.id} />
             </Table.Cell>
           </Table.Row>
         ))}
@@ -46,7 +47,10 @@ const ApiaryTable = ({ apiaries, isLoading, error, reload }) => (
 ApiaryTable.propTypes = {
   apiaries: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  reload: PropTypes.func.isRequired
+  reload: PropTypes.func.isRequired,
+  add: PropTypes.func.isRequired,
+  detail: PropTypes.func.isRequired,
+  error: PropTypes.object
 };
 
 export default ApiaryTable;

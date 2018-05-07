@@ -7,6 +7,7 @@ import LoginPage from './components/pages/LoginPage';
 import ApiariesListPage from './components/pages/apiaries/ListPage';
 import ApiariesEditPage from './components/pages/apiaries/EditPage';
 import ApiariesDetailPage from './components/pages/apiaries/DetailPage';
+import ApiariesAdd from './components/pages/apiaries/AddPage';
 
 import Menu from './components/parts/Menu';
 import HomePage from './components/pages/HomePage';
@@ -20,6 +21,7 @@ const App = () => (
       <Route exact path="/dashboard/apiaries" component={ApiariesListPage} />
       <Route exact path="/dashboard/apiaries/:id" component={ApiariesDetailPage} />
       <Route exact path="/dashboard/apiaries/:id/edit" component={ApiariesEditPage} />
+      <Route exact path="/dashboard/apiaries/add" component={ApiariesAdd} />
       <Route exact path="/login" component={LoginPage} />
     </Segment>
   </Container>

@@ -1,4 +1,4 @@
-import { APIARY_LIST_RECEIVED, APIARY_RECEIVED } from '../actions/types';
+import { APIARY_LIST_RECEIVED, APIARY_RECEIVED, APIARY_CREATED } from '../actions/types';
 
 const initialState = {
   list: [],
@@ -17,6 +17,11 @@ function apiaries(state = initialState, action) {
         ...state,
         current: action.apiary
       };
+    case APIARY_CREATED:
+      return {
+        ...state,
+        list: [...state.list, action.apiary]
+      }
     default:
       return state;
   }

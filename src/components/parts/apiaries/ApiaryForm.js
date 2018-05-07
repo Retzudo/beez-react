@@ -58,7 +58,7 @@ class ApiaryForm extends React.Component {
           value={apiary.name}
           name="name"
           onChange={this.onInputChange}
-          error={!apiary.name || !!errorData.name}/>
+          error={!!errorData.name}/>
         <Message error content={errorData.name} />
 
         <Form.Input
