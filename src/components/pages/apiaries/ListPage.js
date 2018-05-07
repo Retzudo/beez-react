@@ -42,8 +42,13 @@ class ListPage extends React.Component {
   }
 
   onDetail = event => {
-    const id = event.target.datamap.apiaryId;
+    const id = event.target.dataset.apiaryId;
     this.props.history.push(`/dashboard/apiaries/${id}`);
+  }
+
+  onEdit = (event, data) => {
+    const id = data.apiaryid;
+    this.props.history.push(`/dashboard/apiaries/${id}/edit`);
   }
 
   render () {
@@ -58,7 +63,8 @@ class ListPage extends React.Component {
           error={this.state.error}
           reload={this.fetchApiaries}
           add={this.onAdd}
-          detail={this.onDetail} />
+          detail={this.onDetail}
+          edit={this.onEdit} />
       </div>
     );
   }

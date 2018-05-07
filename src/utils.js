@@ -35,3 +35,16 @@ export function refreshLogin(store) {
   let token = localStorage.getItem('token');
   store.dispatch(refreshToken(token));
 }
+
+export function cleanObject(object) {
+  const cleanObject = {}
+  
+  for(let key of Object.keys(object)) {
+    let value = object[key];
+    if (value) {
+      cleanObject[key] = value;
+    }
+  }
+
+  return cleanObject;
+}

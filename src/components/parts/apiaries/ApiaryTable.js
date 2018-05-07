@@ -1,9 +1,8 @@
 import React from 'react';
 import { Table, Loader, Button, Message } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
-const ApiaryTable = ({ apiaries, isLoading, error, reload, add, detail }) => (
+const ApiaryTable = ({ apiaries, isLoading, error, reload, add, detail, edit }) => (
   <div>
     <Table attached={error ? 'top' : false}>
       <Table.Header>
@@ -26,12 +25,12 @@ const ApiaryTable = ({ apiaries, isLoading, error, reload, add, detail }) => (
         </Table.Row> : apiaries.map(apiary => (
           <Table.Row key={apiary.id}>
             <Table.Cell>
-              <Link to={`/dashboard/apiaries/${apiary.id}`}>{apiary.name}</Link>
+              <a style={{cursor: 'pointer'}} onClick={detail} data-apiary-id={apiary.id}>{apiary.name}</a>
             </Table.Cell>
             <Table.Cell>{apiary.address}</Table.Cell>
             <Table.Cell>{apiary.latitude} {apiary.longitude}</Table.Cell>
             <Table.Cell style={{textAlign: 'right'}}>
-              <Button onClick={detail} icon="edit" size="mini" data-apiary-id={apiary.id} />
+              <Button onClick={edit} icon="edit" size="mini" apiaryid={apiary.id} />
             </Table.Cell>
           </Table.Row>
         ))}
@@ -50,6 +49,7 @@ ApiaryTable.propTypes = {
   reload: PropTypes.func.isRequired,
   add: PropTypes.func.isRequired,
   detail: PropTypes.func.isRequired,
+  edit: PropTypes.func.isRequired,
   error: PropTypes.object
 };
 

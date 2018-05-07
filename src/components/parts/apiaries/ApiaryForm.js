@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Message } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
+import { cleanObject } from '../../../utils';
 
 class ApiaryForm extends React.Component {
   state = {
@@ -36,7 +37,7 @@ class ApiaryForm extends React.Component {
   }
 
   onSubmit = () => {
-    this.props.onSubmit({...this.state.apiary});
+    this.props.onSubmit(cleanObject(this.state.apiary));
   }
 
   render() {
