@@ -12,12 +12,14 @@ class ApiaryForm extends React.Component {
       address: '',
       radius: '',
       notes: ''
-    }
+    },
+    pristine: true
   }
 
   componentWillReceiveProps(props) {
     this.setState({
-      apiary: Object.assign(this.state.apiary, props.apiary)
+      apiary: Object.assign(this.state.apiary, props.apiary),
+      pristine: true
     });
   }  
 
@@ -28,7 +30,8 @@ class ApiaryForm extends React.Component {
       apiary: {
         ...apiary,
         [event.target.name]: event.target.type === 'number' ? parseFloat(event.target.value) : event.target.value
-      }
+      },
+      pristine: false
     });
   }
 
@@ -37,7 +40,7 @@ class ApiaryForm extends React.Component {
   }
 
   render() {
-    const { apiary } = this.state;
+    const { apiary, pristine } = this.state;
     const { error } = this.props;
     const errorData = (error && error.response.data) || {};
 
@@ -58,7 +61,7 @@ class ApiaryForm extends React.Component {
           value={apiary.name}
           name="name"
           onChange={this.onInputChange}
-          error={!!errorData.name}/>
+          error={(!pristine && !apiary.name) || !!errorData.name}/>
         <Message error content={errorData.name} />
 
         <Form.Input
