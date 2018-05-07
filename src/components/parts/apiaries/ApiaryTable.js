@@ -25,12 +25,12 @@ const ApiaryTable = ({ apiaries, isLoading, error, reload, add, detail, edit }) 
         </Table.Row> : apiaries.map(apiary => (
           <Table.Row key={apiary.id}>
             <Table.Cell>
-              <a style={{cursor: 'pointer'}} onClick={detail} data-apiary-id={apiary.id}>{apiary.name}</a>
+              <a style={{cursor: 'pointer'}} onClick={() => detail(apiary.id)} data-apiary-id={apiary.id}>{apiary.name}</a>
             </Table.Cell>
             <Table.Cell>{apiary.address}</Table.Cell>
             <Table.Cell>{apiary.latitude} {apiary.longitude}</Table.Cell>
             <Table.Cell style={{textAlign: 'right'}}>
-              <Button onClick={edit} icon="edit" size="mini" apiaryid={apiary.id} />
+              <Button onClick={() => edit(apiary.id)} icon="edit" size="mini" apiaryid={apiary.id} />
             </Table.Cell>
           </Table.Row>
         ))}

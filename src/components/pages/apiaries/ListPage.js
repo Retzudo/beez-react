@@ -41,13 +41,11 @@ class ListPage extends React.Component {
     this.props.history.push('/dashboard/apiaries/add');
   }
 
-  onDetail = event => {
-    const id = event.target.dataset.apiaryId;
+  onDetail = id => {
     this.props.history.push(`/dashboard/apiaries/${id}`);
   }
 
-  onEdit = (event, data) => {
-    const id = data.apiaryid;
+  onEdit = id => {
     this.props.history.push(`/dashboard/apiaries/${id}/edit`);
   }
 
