@@ -5,9 +5,9 @@ function apiaries(state = [], action) {
     case APIARY_LIST_RECEIVED:
       return action.apiaries;
     case APIARY_CREATED:
-      return [...state.list, action.apiary]
+      return [...state, action.apiary]
     case APIARY_UPDATED:
-      return state.list.map(apiary => {
+      return state.map(apiary => {
         if (apiary.id === action.apiary.id) {
           return action.apiary;
         } else {

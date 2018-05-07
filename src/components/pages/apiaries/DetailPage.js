@@ -14,18 +14,23 @@ class DetailPage extends React.Component {
 
   componentDidMount() {
     if (this.props.apiaries.length === 0 && !this.state.didFetch) {
-      this.props.fetchApiaryList();
       this.setState({
-        didFetch: false
+        loading: true
+      });
+      this.props.fetchApiaryList().then(() => {
+        this.setState({
+          loading: false,
+          didFetch: true
+        });
       });
     }
   }
 
   render() {
     const { apiaries } = this.props;
-    const apiary = apiaries.find(apiary => apiary.id === parseInt(this.props.match.params.id));
+    const apiary = apiaries.find(apiary => apiary.id === parseInt(this.props.match.params.id, 10));
 
-    if (!apiary) {
+    if (this.state.didFetch && !apiary) {
       return <Message error>
         404
       </Message>
