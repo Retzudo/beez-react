@@ -1,9 +1,10 @@
 import React from 'react';
-import { Header, Dimmer, Loader, Message } from 'semantic-ui-react';
+import { Dimmer, Loader, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { fetchApiaryList } from '../../../actions/apiaries';
+import ApiaryDetails from '../../parts/apiaries/ApiaryDetails';
 
 class DetailPage extends React.Component {
   state = {
@@ -36,10 +37,14 @@ class DetailPage extends React.Component {
       </Message>
     }
 
+    if (!apiary) {
+      return <div />
+    }
+
     return (
       <div>
         {this.state.loading ? <Dimmer><Loader /></Dimmer> : null }
-        <Header>{apiary.name}</Header>
+        <ApiaryDetails apiary={apiary} />
       </div>
     );
   }
