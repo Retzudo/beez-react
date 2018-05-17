@@ -1,4 +1,4 @@
-import { APIARY_LIST_RECEIVED, APIARY_CREATED, APIARY_UPDATED } from './types';
+import { APIARY_LIST_RECEIVED, APIARY_CREATED, APIARY_UPDATED, APIARY_DELETED } from './types';
 import api from '../api';
 
 export const receivedApiaryList = apiaries => ({
@@ -16,6 +16,11 @@ export const updatedApiary = apiary => ({
   apiary
 });
 
+export const deletedApiary = apiaryId => ({
+  type: APIARY_DELETED,
+  apiaryId
+})
+
 export const fetchApiaryList = () => dispatch => api.apiaries.list()
   .then(apiaries => {
     dispatch(receivedApiaryList(apiaries));
@@ -30,3 +35,8 @@ export const updateApiary = apiary => dispatch => api.apiaries.update(apiary)
   .then(apiary => {
     dispatch(updatedApiary(apiary));
   });
+
+export const deleteApiary = apiary => dispatch => api.apiaries.delete(apiary.id)
+  .then(() => {
+    dispatch(deletedApiary(apiary.id));
+  })
