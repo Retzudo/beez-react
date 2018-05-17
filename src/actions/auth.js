@@ -28,6 +28,8 @@ export const refreshToken = token => dispatch =>
     localStorage.setItem('token', newToken);
     setAuthorizationHeader(newToken);
     dispatch(tokenRefreshed(newToken));
+  }).catch(() => {
+    dispatch(logOut())
   });
 
 export const logOut = () => dispatch => {
