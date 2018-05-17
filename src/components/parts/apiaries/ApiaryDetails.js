@@ -16,7 +16,7 @@ const ApiaryDetails = ({ apiary }) => (
 
     <Header sub content="Details" />
 
-    <Map center={[apiary.latitude, apiary.longitude]} zoom={13} style={{height: '400px'}}>
+    {apiary.latitude && apiary.longitude ? <Map center={[apiary.latitude, apiary.longitude]} zoom={13} style={{height: '400px'}}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
@@ -26,7 +26,7 @@ const ApiaryDetails = ({ apiary }) => (
         </Tooltip>
       </Marker>
       <Circle center={[apiary.latitude, apiary.longitude]} radius={apiary.radius * 1000} color="green" fillColor="green" opacity={0.2} />
-    </Map>
+    </Map> : null}
   </div>
 )
 
